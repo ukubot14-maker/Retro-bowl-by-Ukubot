@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101b2b">
+  <meta name="description" content="Gridiron Pocket — an original retro pixel-art American football game.">
+  <title>Gridiron Pocket</title>
+  <link rel="stylesheet" href="web/style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">GP<span>★</span></div>
+      <div><p class="eyebrow">8-BIT FOOTBALL CLUB</p><h1>GRIDIRON <span>POCKET</span></h1></div>
+      <button id="soundBtn" class="small-btn" aria-label="Toggle sound">♪ SOUND ON</button>
+    </header>
+
+    <section id="homeScreen" class="screen home-screen">
+      <div class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow lime">YOUR TEAM. YOUR LEGACY.</p>
+          <h2>FRIDAY NIGHT<br><span>LIGHTS.</span></h2>
+          <p class="intro">Call the play. Find the gap. Take it to the house.</p>
+          <div class="hero-actions">
+            <button id="quickBtn" class="primary-btn">▶ QUICK MATCH</button>
+            <button id="seasonBtn" class="secondary-btn">★ START A SEASON</button>
+          </div>
+        </div>
+        <div class="pixel-poster" aria-label="Pixel art football player">
+          <div class="stadium-lights"></div><div class="poster-score">HOME 07 <b>:</b> 03 AWAY</div>
+          <div class="goalpost"><i></i></div>
+          <div class="poster-field">
+            <div class="yard y1">20</div><div class="yard y2">30</div><div class="yard y3">40</div><div class="yard y4">50</div>
+            <div class="poster-player"><i class="helmet"></i><i class="body"></i><i class="arm"></i><i class="leg l1"></i><i class="leg l2"></i><i class="ball"></i></div>
+            <div class="poster-defender d1"></div><div class="poster-defender d2"></div>
+          </div>
+          <div class="poster-caption">FOURTH QUARTER. ONE SHOT.</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div><span>01</span><b>CALL THE PLAY</b><small>Run or pass. It's your choice.</small></div>
+        <div><span>02</span><b>MAKE THE READ</b><small>Find the open receiver.</small></div>
+        <div><span>03</span><b>BUILD A DYNASTY</b><small>Win your way to the title.</small></div>
+      </div>
+      <div id="saveSummary" class="save-summary"></div>
+    </section>
+
+    <section id="gameScreen" class="screen game-screen hidden">
+      <div class="game-heading">
+        <button id="backBtn" class="small-btn">← MENU</button>
+        <div><p class="eyebrow">GRIDIRON POCKET LEAGUE</p><h2 id="gameModeTitle">QUICK MATCH</h2></div>
+        <div id="quarterPill" class="quarter-pill">Q1 · 2:00</div>
+      </div>
+      <div class="scoreboard">
+        <div class="team-score"><span id="homeAbbr">RIV</span><b id="homeScore">0</b></div>
+        <div class="score-middle"><span id="downDistance">1ST & 10</span><small id="fieldPosition">OWN 25</small></div>
+        <div class="team-score away"><span id="awayAbbr">BOL</span><b id="awayScore">0</b></div>
+      </div>
+      <div class="field-wrap">
+        <canvas id="fieldCanvas" width="900" height="440" aria-label="Football field gameplay"></canvas>
+        <div class="field-hint" id="fieldHint">CHOOSE A PLAY TO START</div>
+      </div>
+      <div class="play-call">
+        <div class="play-copy"><p class="eyebrow">OFFENSIVE PLAYBOOK</p><h3 id="playTitle">What's the call?</h3><p id="playDescription">Pick a play, then move the ball carrier or throw to a receiver.</p></div>
+        <div class="play-buttons">
+          <button id="runBtn" class="play-btn run">🏃 RUN <small>Cut through the gap</small></button>
+          <button id="passBtn" class="play-btn pass">🏈 PASS <small>Tap a receiver to throw</small></button>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="move-controls">
+          <button data-move="up" aria-label="Move up">▲</button>
+          <div><button data-move="left" aria-label="Move left">◀</button><button data-move="down" aria-label="Move down">▼</button><button data-move="right" aria-label="Move right">▶</button></div>
+        </div>
+        <div class="action-controls">
+          <button id="sprintBtn" class="control-action">⚡ SPRINT</button>
+          <button id="throwBtn" class="control-action accent">🏈 THROW</button>
+        </div>
+        <p class="control-note">Keyboard: WASD / arrows to move · Space to sprint · 1–3 to throw to a receiver</p>
+      </div>
+      <div id="gameMessage" class="game-message" role="status">Choose RUN or PASS to begin.</div>
+      <div id="postGame" class="post-game hidden">
+        <h3 id="postTitle">FINAL WHISTLE</h3><p id="postText"></p><button id="continueBtn" class="primary-btn">CONTINUE</button>
+      </div>
+    </section>
+
+    <section id="seasonScreen" class="screen season-screen hidden">
+      <div class="game-heading"><button id="seasonBackBtn" class="small-btn">← MENU</button><div><p class="eyebrow">THE ROAD TO THE CUP</p><h2>SEASON HQ</h2></div><div class="quarter-pill" id="seasonRecord">0–0</div></div>
+      <div class="season-hero"><div><p class="eyebrow lime">YOUR FRANCHISE</p><h2 id="seasonTeamName">RIVER CITY RIVETS</h2><p>Win games, climb the table, and earn a shot at the Pocket Bowl.</p></div><div class="trophy">🏆</div></div>
+      <div class="season-grid">
+        <div class="panel"><h3>LEAGUE TABLE</h3><div id="standings"></div></div>
+        <div class="panel"><h3>YOUR SCHEDULE</h3><div id="schedule"></div><button id="playNextBtn" class="primary-btn full">PLAY NEXT GAME →</button><button id="resetSeasonBtn" class="secondary-btn full">RESET SEASON</button></div>
+      </div>
+    </section>
+
+    <footer><span>GRIDIRON POCKET © 2026</span><span>ORIGINAL PIXEL FOOTBALL · MADE FOR THE WEB</span></footer>
+  </main>
+  <script src="web/game.js"></script>
+</body>
+</html>
